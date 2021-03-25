@@ -1,7 +1,25 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Header extends ExcelComponent {
+	static className = 'excel__header'
 	toHTML() {
-		return '<h1>Header</h1>'
+		return `
+		<input type="text" 
+		class="excel__header-input" 
+		placeholder="Название таблицы" 
+		/>
+		<div class="excel__header-buttons">
+			<div class="button">
+				<span class="material-icons">
+					delete
+				</span>
+			</div>
+			<div class="button">
+				<span class="material-icons">
+					logout
+				</span>
+			</div>
+		</div>
+`
 	}
 }

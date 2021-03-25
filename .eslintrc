@@ -12,7 +12,9 @@
 			2,
 			"tab"
 		],
+		"space-before-function-paren": "off",
 		"no-tabs": 0,
+		"operator-linebreak": "off",
 		"comma-dangle": "off",
 		"arrow-parens": "off",
 		"object-curly-spacing": [

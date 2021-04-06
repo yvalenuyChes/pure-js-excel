@@ -14,7 +14,7 @@ class Dom {
 	}
 
 	text(text) {
-		if (typeof text === 'string') {
+		if (typeof text !== 'undefined') {
 			this.$el.textContent = text
 			return this
 		}
@@ -29,33 +29,30 @@ class Dom {
 		return this
 	}
 
-	append(node) {
-		if (node instanceof Dom) {
-			node = node.$el
-		}
-		if (Element.prototype.append) {
-			this.$el.append(node)
-		} else {
-			this.$el.appendChild(node)
-		}
-		return this
-	}
-
-	focus() {
-		this.$el.focus()
-		return this
-	}
-
-	find(selector) {
-		return $(this.$el.querySelector(selector))
-	}
-
 	on(eventType, callback) {
 		this.$el.addEventListener(eventType, callback)
 	}
 
 	off(eventType, callback) {
 		this.$el.removeEventListener(eventType, callback)
+	}
+
+	find(selector) {
+		return $(this.$el.querySelector(selector))
+	}
+
+	append(node) {
+		if (node instanceof Dom) {
+			node = node.$el
+		}
+
+		if (Element.prototype.append) {
+			this.$el.append(node)
+		} else {
+			this.$el.appendChild(node)
+		}
+
+		return this
 	}
 
 	get data() {
@@ -66,7 +63,7 @@ class Dom {
 		return $(this.$el.closest(selector))
 	}
 
-	getCords() {
+	getCoords() {
 		return this.$el.getBoundingClientRect()
 	}
 
@@ -77,17 +74,16 @@ class Dom {
 	css(styles = {}) {
 		Object
 			.keys(styles)
-			.forEach(key => this.$el.style[key] = styles[key])
+			.forEach(key => {
+				this.$el.style[key] = styles[key]
+			})
 	}
 
-	addClass(className) {
-		this.$el.classList.add(className)
-		return this
-	}
-
-	removeClass(className) {
-		this.$el.classList.remove(className)
-		return this
+	getStyles(styles = []) {
+		return styles.reduce((res, s) => {
+			res[s] = this.$el.style[s]
+			return res
+		}, {})
 	}
 
 	id(parse) {
@@ -99,6 +95,29 @@ class Dom {
 			}
 		}
 		return this.data.id
+	}
+
+	focus() {
+		this.$el.focus()
+		return this
+	}
+
+	attr(name, value) {
+		if (value) {
+			this.$el.setAttribute(name, value)
+			return this
+		}
+		return this.$el.getAttribute(name)
+	}
+
+	addClass(className) {
+		this.$el.classList.add(className)
+		return this
+	}
+
+	removeClass(className) {
+		this.$el.classList.remove(className)
+		return this
 	}
 }
 
@@ -113,4 +132,3 @@ $.create = (tagName, classes = '') => {
 	}
 	return $(el)
 }
-

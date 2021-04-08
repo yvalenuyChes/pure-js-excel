@@ -12,7 +12,6 @@ export class Toolbar extends ExcelStateComponent {
 			listeners: ['click'],
 			subscribe: ['currentStyles'],
 			...options
-
 		})
 	}
 

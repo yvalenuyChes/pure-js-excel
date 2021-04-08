@@ -1,9 +1,10 @@
 import {
 	CHANGE_TEXT,
+	CHANGE_STYLES,
 	TABLE_RESIZE,
-	CURRENT_STYLES,
 	APPLY_STYLE,
-	CHANGE_TITLE
+	CHANGE_TITLE,
+	UPDATE_DATE
 } from './types'
 
 // Action Creator
@@ -21,13 +22,20 @@ export function changeText(data) {
 	}
 }
 
+export function updateDate() {
+	return {
+		type: UPDATE_DATE
+	}
+}
+
 export function changeStyles(data) {
 	return {
-		type: CURRENT_STYLES,
+		type: CHANGE_STYLES,
 		data
 	}
 }
 
+// value, ids
 export function applyStyle(data) {
 	return {
 		type: APPLY_STYLE,
